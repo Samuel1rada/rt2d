@@ -5,7 +5,7 @@ int main( void )
 {
 	Core core;
 
-	Wolfenstein* wolfenstein = new Wolfenstein();
+	Wolfenstein * wolfenstein = new Wolfenstein();
 	while(wolfenstein->isRunning()) {
 		core.run(wolfenstein);
 		core.showFrameRate(5);

@@ -5,6 +5,7 @@ project (rt2d)
 # delete CMakeCache.txt from the build directory when you edit these options
 ####################################################################
 OPTION(MAKE_START "Make RT2D start application" ON)
+OPTION(MAKE_RACER "Make RT2D start application" ON)
 OPTION(MAKE_DEMO "Make RT2D demo (tests) application" ON)
 OPTION(MAKE_CANVAS_DEMO "Make RT2D Canvas demo (tests) application" ON)
 OPTION(MAKE_FLOCKING "Make flocking application" ON)
@@ -165,6 +166,45 @@ IF(MAKE_START)
 	# Copy assets to the build directory
 	file(
 		COPY start/assets
+		DESTINATION ${CMAKE_BINARY_DIR}
+	)
+ENDIF()
+
+IF(MAKE_RACER)
+	add_executable(roadrager
+
+		RoadRager/main.cpp
+		RoadRager/myscene.cpp
+		RoadRager/myscene.h
+		RoadRager/roadrow.cpp
+		RoadRager/roadrow.h
+	)
+	target_link_libraries(roadrager
+		${ALL_GRAPHICS_LIBS}
+	)
+	# Copy assets to the build directory
+	file(
+		COPY RoadRager/assets
+		DESTINATION ${CMAKE_BINARY_DIR}
+	)
+ENDIF()
+
+
+IF(MAKE_RACER2)
+	add_executable(roadrager2
+
+		RoadRager2/main.cpp
+		RoadRager2/myscene.cpp
+		RoadRager2/myscene.h
+		RoadRager2/roadrow.cpp
+		RoadRager2/roadrow.h
+	)
+	target_link_libraries(roadrager2
+		${ALL_GRAPHICS_LIBS}
+	)
+	# Copy assets to the build directory
+	file(
+		COPY RoadRager2/assets
 		DESTINATION ${CMAKE_BINARY_DIR}
 	)
 ENDIF()

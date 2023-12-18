@@ -7,8 +7,7 @@
 
 #include <rt2d/scene.h>
 
-Scene::Scene()
-	: Entity()
+Scene::Scene() : Entity()
 {
 	std::cout << "################ new Scene ################" << std::endl;
 	_camera = new Camera();
