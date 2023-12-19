@@ -13,14 +13,18 @@ public:
 	void update(float deltaTime);
 
 	std::vector<RoadRow*> roadRows;
+	std::vector<float> originalXPositions;
 
 	size_t x;
 	size_t y;
 
-	Timer timer;
+	double startTime = glfwGetTime();
+	
 
 	float screenHeight = SHEIGHT;
 	float screenWidth = SWIDTH;
+
+	int initialX = screenWidth / 2;
 
   /*float currenHeight = startingPositionY;
 	float spriteWidth = 128.0f;  

@@ -2,6 +2,7 @@
 #include <rt2d/core.h>
 #include "MyScene.h"
 #include "RoadRow.h"
+#include "Player.h"
 
 int main( void ) 
 {
