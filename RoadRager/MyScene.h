@@ -3,8 +3,6 @@
 
 #include <rt2d/scene.h>
 #include "RoadRow.h"
-#include <windows.h>
-
 
 class MyScene : public Scene
 {
@@ -14,67 +12,26 @@ public:
 
 	void update(float deltaTime);
 
+	std::vector<RoadRow*> roadRows;
 
-private: 
+	size_t x;
+	size_t y;
 
-	int x; 
-	int y;
+	Timer timer;
 
-	int leftGrass;
-	int leftCLip;
-	int rightGrass;
-	int rightClip;
-	int nRow;
+	float screenHeight = SHEIGHT;
+	float screenWidth = SWIDTH;
 
-	float middlePoint;
-	float roadWidth;
-	float clipWidth;
-
-protected:
-
-	CHAR_INFO *m_bufScreen;
-
-
-	enum COLOR
-	{
-		FG_GREEN = 0x000A,
-		FG_RED	= 0x000C,
-		FG_GREY	= 0x0007,
-	};
-
-	enum Pixel_Type 
-	{
-		PIXEL_SOLID = 0x2588,
-	};
-
+  /*float currenHeight = startingPositionY;
+	float spriteWidth = 128.0f;  
+    float spriteHeight = 128.0f;
+	
+	float startingPositionX = (screenWidth - spriteWidth) / 2.0f;
+    float startingPositionY = screenHeight - spriteHeight;*/
 	
 
-	void Draw(int x, int y, short c = 0x2588, short col = 0x000F)
-	{
-    	if (x >= 0 && x < SWIDTH && y >= 0 && y < SHEIGHT)
-    	{
-        	m_bufScreen[y * SWIDTH + x].Char.UnicodeChar = c;
-       		m_bufScreen[y * SWIDTH + x].Attributes = col;
-    	}
-	}
+private:
 
-	void Fill(int x1, int y1, int x2, int y2, short c = 0x2588, short col = 0x000F)
-	{
-		Clip(x1, y1);
-		Clip(x2, y2);
-		for (int x = x1; x < x2; x++)
-			for (int y = y1; y < y2; y++)
-				Draw(x, y, c, col);
-	};
-
-
-	void Clip(int &x, int &y)
-{
-    if (x < 0) x = 0;
-    if (x >= SWIDTH) x = SWIDTH - 1;
-    if (y < 0) y = 0;
-    if (y >= SHEIGHT) y = SHEIGHT - 1;
-}
 };
 
 

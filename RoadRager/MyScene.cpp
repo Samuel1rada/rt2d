@@ -3,50 +3,81 @@
 
 MyScene::MyScene() : Scene()
 {
+     //timer.start();
 
+    roadRows = std::vector<RoadRow*>();
+
+	for (int y = 0; y < 10; y++) 
+    {
+        for (int x = 0; x < 1; x++) 
+        {
+            RoadRow* row = new RoadRow();
+            row->position = Vector2(x = screenWidth / 2, y *128 + screenHeight);
+            std::cout << "this row position: " << row->position << std::endl;
+            this->addChild(row);
+            roadRows.push_back(row);
+        }
+    }
+
+
+   
+
+
+   /*if( y != screenHeight / 2  )
+    {
+       
+    }*/ 
+
+
+   
+   /*
+   while(currenHeight < screenHeight / 2)
+    {
+        roadRows.emplace_back(spriteHeight);
+        currenHeight += spriteHeight;
+    }*/ 
+
+    //addChild(&puzzlefield);
+  
 }
+
 MyScene::~MyScene()
 {
-  
+
 }
 void MyScene::update(float deltaTime) 
 {
 
-   Fill(0, 0, SWIDTH, SHEIGHT, 0x2588, 0);
+	//std::cout<< timer.seconds() << " seconds passed"<<std::endl;
 
-    for ( y = 0; y < SHEIGHT / 2; y++)
-    {
-        for(x = 0; x < SWIDTH / 2; x++)
-        {
-            middlePoint = 0.5f;
-            roadWidth = 0.6f;
-            clipWidth = roadWidth * 0.15f;
+    if (input()->getKeyDown(KeyCode::Escape)) {
+		this->stop();
+	}
 
-            roadWidth *= 0.5f;
+     while (!glfwWindowShouldClose(window)) {
+        // Record the start time
+        double startTime = glfwGetTime();
 
-            leftGrass = ( middlePoint - roadWidth - clipWidth) * SWIDTH;
-            leftCLip = (middlePoint - roadWidth) * SWIDTH;
+        // Run the loop for ten seconds
+        while (glfwGetTime() - startTime < 10.0) {
+            // Update the window, handle input, etc.
 
-            rightGrass = ( middlePoint + roadWidth + clipWidth) * SWIDTH;
-            rightClip = (middlePoint + roadWidth) * SWIDTH;
-
-            nRow = SHEIGHT / 2 + y;
-
-           
-            if(x >= 0 && x< leftGrass)
-                Draw(x, nRow, PIXEL_SOLID, FG_GREEN);
-            if(x >= leftGrass && x < leftCLip)
-                Draw(x, nRow, PIXEL_SOLID, FG_RED);
-            if(x >= leftCLip && x < rightClip)
-                Draw(x, nRow, PIXEL_SOLID, FG_GREY);
-            if(x >= rightClip && x < leftGrass)
-                Draw(x, nRow, PIXEL_SOLID, FG_GREY);
-            if(x >= rightGrass && x < SWIDTH)
-                Draw(x, nRow, PIXEL_SOLID, FG_GREEN);
-
+            // You may also use glfwWaitEvents to avoid unnecessary CPU usage
+            glfwPollEvents();
         }
+
+        // Print a message when the timer is done
+        std::cout << "Timer finished!" << std::endl;
+
+        // Reset the timer for the next interval
+        glfwSetTime(0.0);
+
+        // You may add a delay here if needed before starting the next interval
+        // For example, std::this_thread::sleep_for(std::chrono::seconds(1));
     }
+
 }
+
 
 
 

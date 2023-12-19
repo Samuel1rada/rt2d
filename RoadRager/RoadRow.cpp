@@ -3,6 +3,7 @@
 
 RoadRow::RoadRow() : Entity()
 {
+    this->addSprite("assets/road.tga");
     
 }
 RoadRow::~RoadRow()

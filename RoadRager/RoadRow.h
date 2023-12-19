@@ -11,9 +11,7 @@ public:
 	virtual ~RoadRow();
 
 	void update(float deltaTime);
-	
 private:
-
 };
 
 

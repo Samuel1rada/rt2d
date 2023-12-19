@@ -14,9 +14,7 @@ int main( void )
 		core.run(myscene);
 		core.showFrameRate(5);
 	}
-
-	
 	delete myscene;
-	system("pause");
+
 	return 0;
 }
