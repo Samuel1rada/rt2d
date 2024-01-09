@@ -3,24 +3,8 @@
 
 MyScene::MyScene() : Scene()
 {
-     //timer.start();
 
-    roadRows = std::vector<RoadRow*>();
-
-	for (int y = 0; y < 5; y++) 
-    {
-        for (int x = 0; x < 1; x++) 
-        {
-            RoadRow* row = new RoadRow();
-            row->position = Vector2(x = initialX, y * -128 + screenHeight);
-            std::cout << "this row position: " << row->position << std::endl;
-            this->addChild(row);
-            roadRows.push_back(row);
-        }
-    }
-
-    
-
+    CreatRoad();
    /*if( y != screenHeight / 2  )
     {
        
@@ -44,42 +28,47 @@ void MyScene::update(float deltaTime)
 {
 
     originalXPositions = std::vector<float>();
-	//std::cout<< timer.seconds() << " seconds passed"<<std::endl;
 
     if (input()->getKeyUp(KeyCode::Escape)) {
 		this->stop();
 	}
 
-    // Run the loop for ten seconds
-    while (glfwGetTime() - startTime < 16.0) 
+    
+    // for (int i = 0; i < roadRows.size(); i++) 
+    // {
+    //     roadRows[i]->position.x = initialX + i * 10;
+    //     std::cout << "Updated position for row at index " << i << ": " << roadRows[i]->position << std::endl;
+    // }    
+}
+
+void MyScene::CreatRoad()
+{
+    roadRows = std::vector<RoadRow*>();
+
+	for (int y = 0; y < 21; y++) 
     {
-        glfwPollEvents();
-
-        if (glfwGetTime() >= 15.0) 
+        for (int x = 0; x < 1; x++) 
         {
-
-            for (int i = 0; i < roadRows.size(); i++) 
-            {
-                roadRows[i]->position.x = initialX + i * 10;
-                std::cout << "Updated position for row at index " << i << ": " << roadRows[i]->position << std::endl;
-            }
-
-            //std::cout << "Action at 15 seconds!" << std::endl;
-            glfwSetTime(0.0);
-            std::cout << "Timer reset" << std::endl;
-
-            break;
+            RoadRow* row = new RoadRow();
+            row->position = Vector2(x = initialX, y * 20 + initialY);
+            std::cout << "this row position: " << row->position << std::endl;
+            this->addChild(row);
+            roadRows.push_back(row);
         }
-        
     }
 
-    /*for (int i = 0; i < roadRows.size(); i++) {
-    roadRows[i]->position.x = originalXPositions[i];
-    std::cout << "Reverted position for row at index " << i << ": " << roadRows[i]->position << std::endl;
-    }*/
-    
-    
+    for(int i = 0; i < roadRows.size(); i++)
+    {
+        roadRows[i]->scale.x = i * 0.5;
+       // roadRows->rotation.y = 180.0f;
+        std::cout << "Updated scale for row at index " << i << ": " << roadRows[i]->scale << std::endl;
+    }
+
 }
+
+    
+    
+
 
 
 

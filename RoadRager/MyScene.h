@@ -12,6 +12,8 @@ public:
 
 	void update(float deltaTime);
 
+	void CreatRoad();
+
 	std::vector<RoadRow*> roadRows;
 	std::vector<float> originalXPositions;
 
@@ -25,6 +27,7 @@ public:
 	float screenWidth = SWIDTH;
 
 	int initialX = screenWidth / 2;
+	int initialY = screenHeight / 2;
 
   /*float currenHeight = startingPositionY;
 	float spriteWidth = 128.0f;  
