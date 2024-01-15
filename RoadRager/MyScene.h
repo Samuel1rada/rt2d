@@ -2,6 +2,7 @@
 #define MYSCENE_H
 
 #include <rt2d/scene.h>
+
 #include "RoadRow.h"
 
 class MyScene : public Scene
@@ -13,15 +14,15 @@ public:
 	void update(float deltaTime);
 
 	void CreatRoad();
+	void ColorSwitch();
 
 	std::vector<RoadRow*> roadRows;
 	std::vector<float> originalXPositions;
 
 	size_t x;
 	size_t y;
-
-	double startTime = glfwGetTime();
-	
+	Timer t;
+	RoadRow* row;
 
 	float screenHeight = SHEIGHT;
 	float screenWidth = SWIDTH;
@@ -40,6 +41,7 @@ public:
 private:
 
 };
+
 
 
 

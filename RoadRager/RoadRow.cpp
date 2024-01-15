@@ -4,6 +4,7 @@
 RoadRow::RoadRow() : Entity()
 {
     this->addSprite("assets/road.tga");
+    this->sprite()->color = RED;
     
 }
 RoadRow::~RoadRow()
