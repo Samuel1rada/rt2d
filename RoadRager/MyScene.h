@@ -23,6 +23,8 @@ public:
 	size_t y;
 	Timer t;
 	RoadRow* row;
+	RoadRow* roadLine;
+	RoadRow* siderow2;
 
 	float screenHeight = SHEIGHT;
 	float screenWidth = SWIDTH;

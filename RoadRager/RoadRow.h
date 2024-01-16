@@ -7,7 +7,7 @@
 class RoadRow : public Entity
 {
 public: 
-	RoadRow();
+	RoadRow(int Type);
 	virtual ~RoadRow();
 
 	void update(float deltaTime);

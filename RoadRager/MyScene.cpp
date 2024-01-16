@@ -14,14 +14,13 @@ MyScene::~MyScene()
 }
 void MyScene::update(float deltaTime) 
 {
-    ColorSwitch();
     originalXPositions = std::vector<float>();
 
     if (input()->getKeyUp(KeyCode::Escape)) {
 		this->stop();
 	}
 
-    std::cout << " seconds passed " << t.seconds() << std::endl;
+    //std::cout << " seconds passed " << t.seconds() << std::endl;
     
     // for (int i = 0; i < roadRows.size(); i++) 
     // {
@@ -38,12 +37,18 @@ void MyScene::CreatRoad()
     {
         for (int x = 0; x < 1; x++) 
         {
-            row = new RoadRow();
-            row->position = Vector2(x = initialX, y * 20 + initialY);
-            std::cout << "this row position: " << row->position << std::endl;
-            this->addChild(row);
-            roadRows.push_back(row);
-        }
+            // row = new RoadRow(0);
+            // row->position = Vector2(x = initialX, y * 20 + initialY);
+            // std::cout << "this row position: " << row->position << std::endl;
+            // this->addChild(row);
+            // roadRows.push_back(row);
+
+            roadLine = new RoadRow(1);
+            roadLine->position = Vector2(x = initialX, y * 20 + initialY);
+            std::cout << "this roadline position: " << roadLine->position << std::endl;
+            this->addChild(roadLine);
+            roadRows.push_back(roadLine);
+        }    
     }
 
     //scales the row for perspective
