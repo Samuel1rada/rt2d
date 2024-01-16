@@ -189,26 +189,6 @@ IF(MAKE_RACER)
 	)
 ENDIF()
 
-
-IF(MAKE_RACER2)
-	add_executable(roadrager2
-
-		RoadRager2/main.cpp
-		RoadRager2/myscene.cpp
-		RoadRager2/myscene.h
-		RoadRager2/roadrow.cpp
-		RoadRager2/roadrow.h
-	)
-	target_link_libraries(roadrager2
-		${ALL_GRAPHICS_LIBS}
-	)
-	# Copy assets to the build directory
-	file(
-		COPY RoadRager2/assets
-		DESTINATION ${CMAKE_BINARY_DIR}
-	)
-ENDIF()
-
 ####################################################################
 # demo                                                             #
 ####################################################################

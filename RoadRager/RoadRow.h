@@ -11,7 +11,11 @@ public:
 	virtual ~RoadRow();
 
 	void update(float deltaTime);
+
+	int getType() const;
 private:
+
+	int type;
 };
 
 

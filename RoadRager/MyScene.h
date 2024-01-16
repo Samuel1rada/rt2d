@@ -17,6 +17,7 @@ public:
 	void ColorSwitch();
 
 	std::vector<RoadRow*> roadRows;
+	std::vector<RoadRow*> roadLines;
 	std::vector<float> originalXPositions;
 
 	size_t x;

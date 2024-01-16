@@ -31,31 +31,34 @@ void MyScene::update(float deltaTime)
 void MyScene::CreatRoad()
 {
     roadRows = std::vector<RoadRow*>();
+    roadLines = std::vector<RoadRow*>();
 
     //creats the roadrows and positions them.
 	for (int y = 0; y < 21; y++) 
     {
         for (int x = 0; x < 1; x++) 
         {
-            // row = new RoadRow(0);
-            // row->position = Vector2(x = initialX, y * 20 + initialY);
-            // std::cout << "this row position: " << row->position << std::endl;
-            // this->addChild(row);
-            // roadRows.push_back(row);
+            row = new RoadRow(0);
+            row->position = Vector2(x = initialX, y * 20 + initialY);
+            std::cout << "this row position: " << row->position << std::endl;
+            this->addChild(row);
+            roadRows.push_back(row);
 
             roadLine = new RoadRow(1);
-            roadLine->position = Vector2(x = initialX, y * 20 + initialY);
+            roadLine->position = Vector2(initialX - 90, y * 20 + initialY);
             std::cout << "this roadline position: " << roadLine->position << std::endl;
             this->addChild(roadLine);
-            roadRows.push_back(roadLine);
+            roadLines.push_back(roadLine);
         }    
     }
-
     //scales the row for perspective
     for(int i = 0; i < roadRows.size(); i++)
     {
-        roadRows[i]->scale.x = i * 0.5;
-        std::cout << "Updated scale for row at index " << i << ": " << roadRows[i]->scale << std::endl;
+        if(roadRows[i]->getType() == 0)
+        {
+            roadRows[i]->scale.x = i * 0.5;
+            std::cout << "Updated scale for row at index " << i << ": " << roadRows[i]->scale << std::endl;
+        }
     }
 }
 void MyScene::ColorSwitch()

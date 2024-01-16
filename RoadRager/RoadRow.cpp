@@ -1,19 +1,19 @@
 #include "RoadRow.h"
 
 
-RoadRow::RoadRow(int Type) : Entity()
+RoadRow::RoadRow(int Type) : Entity(), type(Type)
 {
-    if(Type == 0)
+    if(type == 0)
     {
         this->addSprite("assets/road.tga");
     }
-    if(Type == 1)
+    else if(type == 1)
     {
         this->addSprite("assets/road.tga");
         this->sprite()->color = RED;
         
     }
-    if(Type == 2)
+    else if(type == 2)
     {
          this->addSprite("assets/road.tga");
          this->sprite()->color = GRAY;
@@ -27,4 +27,8 @@ RoadRow::~RoadRow()
 void RoadRow::update(float deltaTime)
 {
     
+}
+int RoadRow::getType() const
+{
+    return type;
 }
