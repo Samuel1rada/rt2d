@@ -16,9 +16,10 @@ public:
 	void CreatRoad();
 	void ColorSwitch();
 
-	std::vector<RoadRow*> roadRows;
-	std::vector<RoadRow*> sideRoad;
 	std::vector<RoadRow*> grass;
+	std::vector<RoadRow*> roadRows;
+	std::vector<RoadRow*> sideRoadL;
+	std::vector<RoadRow*> sideRoadR;
 	std::vector<float> originalXPositions;
 
 	RoadRow* grassBG;
