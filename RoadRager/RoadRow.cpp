@@ -16,7 +16,7 @@ RoadRow::RoadRow(int Type) : Entity(), type(Type)
     else if(type == 2)
     {
          this->addSprite("assets/road.tga");
-         this->sprite()->color = GRAY;
+         this->sprite()->color = GREEN;
     }
 }
 RoadRow::~RoadRow()

@@ -17,15 +17,18 @@ public:
 	void ColorSwitch();
 
 	std::vector<RoadRow*> roadRows;
-	std::vector<RoadRow*> roadLines;
+	std::vector<RoadRow*> sideRoad;
+	std::vector<RoadRow*> grass;
 	std::vector<float> originalXPositions;
+
+	RoadRow* grassBG;
+	RoadRow* row;
+	RoadRow* leftRoadSide;
+	RoadRow* rightRoadSide;
 
 	size_t x;
 	size_t y;
 	Timer t;
-	RoadRow* row;
-	RoadRow* roadLine;
-	RoadRow* siderow2;
 
 	float screenHeight = SHEIGHT;
 	float screenWidth = SWIDTH;
