@@ -1,7 +1,7 @@
-#include "RoadRow.h"
+#include "RoadEntity.h"
 
 
-RoadRow::RoadRow(int Type) : Entity(), type(Type)
+RoadEntity::RoadEntity(int Type) : Entity(), type(Type)
 {
     if(type == 0)
     {
@@ -19,16 +19,16 @@ RoadRow::RoadRow(int Type) : Entity(), type(Type)
          this->sprite()->color = GREEN;
     }
 }
-RoadRow::~RoadRow()
+RoadEntity::~RoadEntity()
 {
 
 }
 
-void RoadRow::update(float deltaTime)
+void RoadEntity::update(float deltaTime)
 {
     
 }
-int RoadRow::getType() const
+int RoadEntity::getType() const
 {
     return type;
 }

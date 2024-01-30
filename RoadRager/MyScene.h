@@ -3,7 +3,8 @@
 
 #include <rt2d/scene.h>
 
-#include "RoadRow.h"
+#include "RoadEntity.h"
+#include "PlayerEntity.h"
 
 class MyScene : public Scene
 {
@@ -13,19 +14,26 @@ public:
 
 	void update(float deltaTime);
 
-	void Input()
 	void CreatRoad();
 	void BendRoad(float distance);
+	void CreatePlayer();
+	void PlayerInput(float deltaTime);
+	void SwitchPlayerEntity(int entityType);
+	void ClampPlayerPosition();
 
-	std::vector<RoadRow *> grass;
-	std::vector<RoadRow *> roadRows;
-	std::vector<RoadRow *> sideRoadL;
-	std::vector<RoadRow *> sideRoadR;
+	std::vector<RoadEntity *> grass;
+	std::vector<RoadEntity *> roadRows;
+	std::vector<RoadEntity *> sideRoadL;
+	std::vector<RoadEntity *> sideRoadR;
 
-	RoadRow *grassBG;
-	RoadRow *row;
-	RoadRow *leftRoadSide;
-	RoadRow *rightRoadSide;
+	RoadEntity *grassBG;
+	RoadEntity *row;
+	RoadEntity *rowL;
+	RoadEntity *rowR;
+	RoadEntity *leftRoadSide;
+	RoadEntity *rightRoadSide;
+
+	PlayerEntity *player;
 
 	size_t x;
 	size_t y;
@@ -33,12 +41,19 @@ public:
 
 	float screenHeight = SHEIGHT;
 	float screenWidth = SWIDTH;
-
+	float leftSwitchPoint = 640.0f;
+	float rightSwitchPoint = 320.0f;
 	float multiplier;
+	float playerWidth;
+	float leftBoundary;
+	float rightBoundary;
 	int moveCount = 0;
 
-	int initialX = screenWidth / 2;
-	int initialY = screenHeight / 2;
+	const int initialX = screenWidth / 2;
+	const int initialY = screenHeight / 2;
+	const int numRows = 21;
+	const float scaleIncrement = 0.07f;
+	const float playerSpeed = 300.0f;
 
 	/*
 	  std::vector<float> originalXPositions;

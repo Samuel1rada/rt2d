@@ -1,17 +1,16 @@
-#ifndef ROADROWS_H
-#define ROADROWS_H
+#ifndef ROADENTITY_H
+#define ROADENTITY_H
 
 #include <rt2d/scene.h>
 #include <rt2d/entity.h>
 
-class RoadRow : public Entity
+class RoadEntity : public Entity
 {
 public: 
-	RoadRow(int Type);
-	virtual ~RoadRow();
+	RoadEntity(int Type);
+	virtual ~RoadEntity();
 
 	void update(float deltaTime);
-
 	int getType() const;
 private:
 
@@ -20,4 +19,4 @@ private:
 
 
 
-#endif /* ROADROWS_H */
+#endif /* ROADENTITY_H */

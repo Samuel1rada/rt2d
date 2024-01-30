@@ -5,6 +5,7 @@ MyScene::MyScene() : Scene()
 {
     t.start();
     CreatRoad();
+    CreatePlayer();
     // std::cout << "Size of roadRows: " << roadRows.size() << std::endl;
     // std::cout << "Position of the first row in roadRows: " << roadRows.front()->position << std::endl;
 }
@@ -19,13 +20,18 @@ MyScene::~MyScene()
         delete row;
     for (auto &row : sideRoadR)
         delete row;
+
+    grass.clear();
+    roadRows.clear();
+    sideRoadL.clear();
+    sideRoadR.clear();
+    this->removeChild(player);
 }
 void MyScene::update(float deltaTime)
 {
-    input();
-}
-void Myscene::Input()
-{
+
+    PlayerInput(deltaTime);
+
     if (input()->getKey(KeyCode::E))
     {
         BendRoad(100.0f * deltaTime);
@@ -34,19 +40,17 @@ void Myscene::Input()
     {
         BendRoad(-100.0f * deltaTime);
     }
-
     if (input()->getKeyUp(KeyCode::Escape))
     {
         this->stop();
     }
 }
-
 void MyScene::CreatRoad()
 {
-    grass = std::vector<RoadRow *>();
-    roadRows = std::vector<RoadRow *>();
-    sideRoadL = std::vector<RoadRow *>();
-    sideRoadR = std::vector<RoadRow *>();
+    grass = std::vector<RoadEntity *>();
+    roadRows = std::vector<RoadEntity *>();
+    sideRoadL = std::vector<RoadEntity *>();
+    sideRoadR = std::vector<RoadEntity *>();
 
     // creates the road and grass
     for (int y = 0; y < 21; y++)
@@ -54,7 +58,7 @@ void MyScene::CreatRoad()
         for (int x = 0; x < 1; x++)
         {
             // creates grass
-            grassBG = new RoadRow(2);
+            grassBG = new RoadEntity(2);
             grassBG->position = Vector2(initialX, y * 20 + initialY + 20);
             grassBG->scale.x = screenWidth;
             // std::cout << "this roadline position: " << grassBG->position << std::endl;
@@ -62,7 +66,7 @@ void MyScene::CreatRoad()
             grass.push_back(grassBG);
 
             // creates road
-            row = new RoadRow(0);
+            row = new RoadEntity(0);
             row->position = Vector2(initialX, y * 20 + initialY);
             row->scale.x = 4;
             // std::cout << "this row position: " << row->position << std::endl;
@@ -70,12 +74,12 @@ void MyScene::CreatRoad()
             roadRows.push_back(row);
 
             // creates right road side
-            RoadRow *rowR = new RoadRow(1);
+            rowR = new RoadEntity(1);
             this->addChild(rowR);
             sideRoadR.push_back(rowR);
 
             // creates left road side
-            RoadRow *rowL = new RoadRow(1);
+            rowL = new RoadEntity(1);
             this->addChild(rowL);
             sideRoadL.push_back(rowL);
 
@@ -99,11 +103,12 @@ void MyScene::CreatRoad()
         }
     }
 }
+
+
+// creates the illusion of an bending road
 void MyScene::BendRoad(float distance)
 {
-    multiplier = 1.0f;
-
-    // Move the elements in roadRows
+    // Move the rows in roadRows
     for (auto row : roadRows)
     {
         row->position.x += distance * multiplier;
@@ -113,7 +118,7 @@ void MyScene::BendRoad(float distance)
 
     multiplier = 1.0f;
 
-    // Move the elements in sideRoadR
+    // Move the rows in sideRoadR
     for (auto row : sideRoadR)
     {
         row->position.x += distance * multiplier;
@@ -123,7 +128,7 @@ void MyScene::BendRoad(float distance)
 
     multiplier = 1.0f;
 
-    // Move the elements in sideRoadL
+    // Move the rows in sideRoadL
     for (auto row : sideRoadL)
     {
         row->position.x += distance * multiplier;
@@ -131,10 +136,79 @@ void MyScene::BendRoad(float distance)
         moveCount++;
     }
 
-    // Reset moveCount and multiplier after moving all elements
+    // Reset moveCount and multiplier after moving all rows
     if (moveCount >= roadRows.size() || moveCount >= sideRoadR.size() || moveCount >= sideRoadL.size())
     {
         moveCount = 0;
         multiplier = 1.0f;
     }
+}
+
+void MyScene::CreatePlayer()
+{
+    player = new PlayerEntity(0);
+    player->position = Vector2(initialX, 600);
+    this->addChild(player);
+}
+
+//creates instance off player
+void MyScene::PlayerInput(float deltaTime)
+{
+
+    if (input()->getKey(KeyCode::A))
+    {
+        // Move left
+        this->player->position.x -= playerSpeed * deltaTime;
+
+        if (this->player->position.x < leftSwitchPoint)
+        {
+            SwitchPlayerEntity(1);
+        }
+    }
+    else if (input()->getKey(KeyCode::D))
+    {
+        // Move right
+        this->player->position.x += playerSpeed * deltaTime;
+
+        if (this->player->position.x > rightSwitchPoint)
+        {
+            SwitchPlayerEntity(2);
+        }
+    }
+    ClampPlayerPosition();
+}
+
+void MyScene::SwitchPlayerEntity(int entityType)
+{
+    Vector2 playerPosition = player->position;
+    // Remove the current player entity from the scene
+    this->removeChild(player);
+
+    if (playerPosition.x < rightSwitchPoint)
+        player = new PlayerEntity(0); 
+    else if (playerPosition.x < leftSwitchPoint)
+    {
+        if (entityType == 1)
+            player = new PlayerEntity(1);
+        else if (entityType == 2)
+            player = new PlayerEntity(2);
+    }
+    else
+        player = new PlayerEntity(0); 
+
+    player->position = playerPosition;
+
+    // Add the new player entity to the scene
+    this->addChild(player);
+}
+
+// so the player doesnt go off screen
+void MyScene::ClampPlayerPosition()
+{
+    // Calculate the left and right boundaries based on players scale
+    playerWidth = player->scale.x;
+    leftBoundary = playerWidth / 2.0f;
+    rightBoundary = screenWidth - playerWidth / 2.0f;
+
+    player->position.x = std::max(leftBoundary, std::min(player->position.x, rightBoundary));
 }

@@ -1,16 +1,19 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef PLAYERENTITY_H
+#define PLAYERENTITY_H
 
 #include <rt2d/entity.h>
 
-class Player : public Entity
+class PlayerEntity : public Entity
 {
 public: 
-	Player();
-	virtual ~Player();
+	PlayerEntity(int PlayerType);
+	virtual ~PlayerEntity();
 
 	void update(float deltaTime);
+	int getType() const;
 private:
+
+	int Playertype;
 };
 
 #endif /* PLAYER_H */
