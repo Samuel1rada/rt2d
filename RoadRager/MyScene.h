@@ -41,8 +41,8 @@ public:
 
 	float screenHeight = SHEIGHT;
 	float screenWidth = SWIDTH;
-	float leftSwitchPoint = 640.0f;
-	float rightSwitchPoint = 320.0f;
+	float leftSwitchPoint = screenWidth / 4.0f;
+	float rightSwitchPoint = 3.0f * screenWidth / 4.0f;
 	float multiplier;
 	float playerWidth;
 	float leftBoundary;

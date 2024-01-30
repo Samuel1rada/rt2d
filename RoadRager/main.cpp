@@ -3,6 +3,7 @@
 #include "MyScene.h"
 #include "RoadEntity.h"
 #include "PlayerEntity.h"
+#include "Obstacle.h"
 
 int main( void ) 
 {

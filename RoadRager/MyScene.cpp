@@ -205,8 +205,8 @@ void MyScene::SwitchPlayerEntity(int entityType)
 // so the player doesnt go off screen
 void MyScene::ClampPlayerPosition()
 {
-    // Calculate the left and right boundaries based on players scale
     playerWidth = player->scale.x;
+
     leftBoundary = playerWidth / 2.0f;
     rightBoundary = screenWidth - playerWidth / 2.0f;
 
