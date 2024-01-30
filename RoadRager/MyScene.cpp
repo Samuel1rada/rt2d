@@ -11,16 +11,28 @@ MyScene::MyScene() : Scene()
 
 MyScene::~MyScene()
 {
+    for (auto &row : grass)
+        delete row;
+    for (auto &row : roadRows)
+        delete row;
+    for (auto &row : sideRoadL)
+        delete row;
+    for (auto &row : sideRoadR)
+        delete row;
 }
 void MyScene::update(float deltaTime)
 {
+    input();
+}
+void Myscene::Input()
+{
     if (input()->getKey(KeyCode::E))
     {
-        RoadBend(100.0f * deltaTime); 
+        BendRoad(100.0f * deltaTime);
     }
     if (input()->getKey(KeyCode::Q))
     {
-        RoadBend(-100.0f * deltaTime); 
+        BendRoad(-100.0f * deltaTime);
     }
 
     if (input()->getKeyUp(KeyCode::Escape))
@@ -28,6 +40,7 @@ void MyScene::update(float deltaTime)
         this->stop();
     }
 }
+
 void MyScene::CreatRoad()
 {
     grass = std::vector<RoadRow *>();
@@ -86,35 +99,42 @@ void MyScene::CreatRoad()
         }
     }
 }
-void MyScene::RoadBend(float distance)
+void MyScene::BendRoad(float distance)
 {
-    // move onlyeee
-   static int moveCount = 0;  // Keep track of the number of elements moved
+    multiplier = 1.0f;
 
-    // Move the first 'moveCount' elements in roadRows
-    for (int i = 0; i <= moveCount && i < roadRows.size(); ++i)
+    // Move the elements in roadRows
+    for (auto row : roadRows)
     {
-        roadRows[i]->position.x += distance;
+        row->position.x += distance * multiplier;
+        multiplier *= 0.9f;
+        moveCount++;
     }
 
-    // Move the first 'moveCount' elements in sideRoadR
-    for (int i = 0; i <= moveCount && i < sideRoadR.size(); ++i)
+    multiplier = 1.0f;
+
+    // Move the elements in sideRoadR
+    for (auto row : sideRoadR)
     {
-        sideRoadR[i]->position.x += distance;
+        row->position.x += distance * multiplier;
+        multiplier *= 0.85f;
+        moveCount++;
     }
 
-    // Move the first 'moveCount' elements in sideRoadL
-    for (int i = 0; i <= moveCount && i < sideRoadL.size(); ++i)
+    multiplier = 1.0f;
+
+    // Move the elements in sideRoadL
+    for (auto row : sideRoadL)
     {
-        sideRoadL[i]->position.x += distance;
+        row->position.x += distance * multiplier;
+        multiplier *= 0.85f;
+        moveCount++;
     }
 
-    // Increment moveCount after moving all elements
-    moveCount++;
-
-    // Reset moveCount after moving all elements in the lists
-    if (moveCount >= roadRows.size() && moveCount >= sideRoadR.size() && moveCount >= sideRoadL.size())
+    // Reset moveCount and multiplier after moving all elements
+    if (moveCount >= roadRows.size() || moveCount >= sideRoadR.size() || moveCount >= sideRoadL.size())
     {
         moveCount = 0;
+        multiplier = 1.0f;
     }
 }

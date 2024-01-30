@@ -176,8 +176,10 @@ IF(MAKE_RACER)
 		RoadRager/main.cpp
 		RoadRager/myscene.cpp
 		RoadRager/myscene.h
-		RoadRager/roadrow.cpp
-		RoadRager/roadrow.h
+		RoadRager/roadentity.cpp
+		RoadRager/roadentity.h
+		RoadRager/playerentity.cpp
+		RoadRager/playerentity.h
 	)
 	target_link_libraries(roadrager
 		${ALL_GRAPHICS_LIBS}

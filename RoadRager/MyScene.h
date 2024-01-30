@@ -7,24 +7,25 @@
 
 class MyScene : public Scene
 {
-public: 
+public:
 	MyScene();
-	virtual~MyScene();
+	virtual ~MyScene();
 
 	void update(float deltaTime);
 
+	void Input()
 	void CreatRoad();
-	void RoadBend(float distance);
+	void BendRoad(float distance);
 
-	std::vector<RoadRow*> grass;
-	std::vector<RoadRow*> roadRows;
-	std::vector<RoadRow*> sideRoadL;
-	std::vector<RoadRow*> sideRoadR;
+	std::vector<RoadRow *> grass;
+	std::vector<RoadRow *> roadRows;
+	std::vector<RoadRow *> sideRoadL;
+	std::vector<RoadRow *> sideRoadR;
 
-	RoadRow* grassBG;
-	RoadRow* row;
-	RoadRow* leftRoadSide;
-	RoadRow* rightRoadSide;
+	RoadRow *grassBG;
+	RoadRow *row;
+	RoadRow *leftRoadSide;
+	RoadRow *rightRoadSide;
 
 	size_t x;
 	size_t y;
@@ -33,25 +34,23 @@ public:
 	float screenHeight = SHEIGHT;
 	float screenWidth = SWIDTH;
 
+	float multiplier;
+	int moveCount = 0;
+
 	int initialX = screenWidth / 2;
 	int initialY = screenHeight / 2;
 
-  /*
-	std::vector<float> originalXPositions;
+	/*
+	  std::vector<float> originalXPositions;
 
-  	float currenHeight = startingPositionY;
-	float spriteWidth = 128.0f;  
-    float spriteHeight = 128.0f;
-	
-	float startingPositionX = (screenWidth - spriteWidth) / 2.0f;
-    float startingPositionY = screenHeight - spriteHeight;*/
-	
+	  float currenHeight = startingPositionY;
+	  float spriteWidth = 128.0f;
+	  float spriteHeight = 128.0f;
+
+	  float startingPositionX = (screenWidth - spriteWidth) / 2.0f;
+	  float startingPositionY = screenHeight - spriteHeight;*/
 
 private:
-
 };
-
-
-
 
 #endif /* MYSCENE_H */
