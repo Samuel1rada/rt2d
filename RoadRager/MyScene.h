@@ -14,13 +14,12 @@ public:
 	void update(float deltaTime);
 
 	void CreatRoad();
-	void ColorSwitch();
+	void RoadBend(float distance);
 
 	std::vector<RoadRow*> grass;
 	std::vector<RoadRow*> roadRows;
 	std::vector<RoadRow*> sideRoadL;
 	std::vector<RoadRow*> sideRoadR;
-	std::vector<float> originalXPositions;
 
 	RoadRow* grassBG;
 	RoadRow* row;
@@ -37,7 +36,10 @@ public:
 	int initialX = screenWidth / 2;
 	int initialY = screenHeight / 2;
 
-  /*float currenHeight = startingPositionY;
+  /*
+	std::vector<float> originalXPositions;
+
+  	float currenHeight = startingPositionY;
 	float spriteWidth = 128.0f;  
     float spriteHeight = 128.0f;
 	
